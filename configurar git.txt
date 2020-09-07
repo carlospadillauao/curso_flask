@@ -4,3 +4,5 @@ git config --global user.name "name"
 
 1. git init (en folder deseado)
 2. git remote add origin "url.git" (direccion repositorio)
+
+x
