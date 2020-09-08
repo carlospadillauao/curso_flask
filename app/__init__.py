@@ -4,11 +4,18 @@ from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy#coneccion con base de datos
 from flask_login import LoginManager
 
+from flask_mail import Mail # mail_server
+
 app = Flask(__name__)
+
+mail = Mail() # mail_server
+
 db = SQLAlchemy()#coneccion con base de datos
 csrf = CSRFProtect()
 bootstrap = Bootstrap()#instancia/permite el uso de bootstrap
 login_manager = LoginManager()
+
+
 
 from .views import page 
 from .models import *
@@ -25,6 +32,8 @@ def create_app(config):
     login_manager.init_app(app)
     login_manager.login_view = '.login' #si un usuario no logueado intenta ingresar a una pagina restringida sera redirigido a esta direccion
     login_manager.login_message = LOGIN_REQUIRED
+
+    mail.init_app(app) # mail_server
 
     with app.app_context():
         db.init_app(app)#coneccion con base de datos

@@ -8,6 +8,8 @@ from .forms import *
 from .models import *
 from .consts import *
 
+from .email import * #mail_Server
+
 page = Blueprint('page', __name__)
 
 #funcion a ejecutar cuando: error 400 ocurre
@@ -64,6 +66,7 @@ def register():
             print("usuario creado")
             print(user.id)
             login_user(user)#espera un objeto user.mixin / inicio de sesion???
+            welcome_mail(user, "user") # mail_server
             return redirect(url_for('.tasks'))
         else:
             print('Campos no validados')
